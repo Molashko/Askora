@@ -1,0 +1,160 @@
+{
+  "source_note": "В анализ включены последние 20 естественных пользовательских формулировок до массовых synthetic benchmark-прогонов. Исторические записи для части из них были вытеснены более новыми тестовыми запросами из query_history, поэтому для корректности зафиксировано текущее поведение системы на повторном прогоне этих же фраз.",
+  "summary": {
+    "queries_analyzed": 20,
+    "current_executed": 20,
+    "current_needs_clarification": 0,
+    "current_failed": 0,
+    "current_pass_rate": 100.0,
+    "main_patterns": [
+      "single-metric aggregations",
+      "time-series by day or month",
+      "hourly breakdown",
+      "multi-metric queries",
+      "status breakdowns",
+      "percent/comparison queries"
+    ]
+  },
+  "queries": [
+    {
+      "question": "На сколько процентов выросла выручка в марте относительно февраля",
+      "status_now": "executed",
+      "metrics_now": ["total_revenue"],
+      "dimensions_now": [],
+      "assessment": "correct"
+    },
+    {
+      "question": "Какой процент выполненных заказов в этом месяце",
+      "status_now": "executed",
+      "metrics_now": ["order_completion_rate"],
+      "dimensions_now": [],
+      "assessment": "correct"
+    },
+    {
+      "question": "Сколько было принятых тендеров в этом месяце",
+      "status_now": "executed",
+      "metrics_now": ["successful_tenders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Сколько в среднем до принятия тендера в этом месяце",
+      "status_now": "executed",
+      "metrics_now": ["avg_accept_time_min"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Средний ценник за прошлый месяц",
+      "status_now": "executed",
+      "metrics_now": ["avg_order_price"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Сколько отмен было в прошлом месяце",
+      "status_now": "executed",
+      "metrics_now": ["cancelled_orders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Сколько у нас выполнено за прошлый месяц",
+      "status_now": "executed",
+      "metrics_now": ["completed_orders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Что по деньгам за прошлый месяц",
+      "status_now": "executed",
+      "metrics_now": ["total_revenue"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Мне бы просто понять, сколько у нас заказов",
+      "status_now": "executed",
+      "metrics_now": ["total_orders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Средний чек по месяцам за этот год",
+      "status_now": "executed",
+      "metrics_now": ["avg_order_price"],
+      "dimensions_now": ["order_month"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Средняя цена заказа по часам за вчера",
+      "status_now": "executed",
+      "metrics_now": ["avg_order_price"],
+      "dimensions_now": ["order_hour"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Отмены клиентом и водителем по дням в этом месяце",
+      "status_now": "executed",
+      "metrics_now": ["client_cancellations", "driver_cancellations"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Тендеры по статусам тендера за вчера",
+      "status_now": "executed",
+      "metrics_now": ["total_tenders"],
+      "dimensions_now": ["tender_status"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Выполненные заказы по статусам заказа за текущую неделю",
+      "status_now": "executed",
+      "metrics_now": ["completed_orders"],
+      "dimensions_now": ["order_date", "order_status"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Заказы по городам за вчера",
+      "status_now": "executed",
+      "metrics_now": ["total_orders"],
+      "dimensions_now": ["city_id"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Выполненные и отмененные по неделям за этот год",
+      "status_now": "executed",
+      "metrics_now": ["completed_orders", "cancelled_orders"],
+      "dimensions_now": ["order_week"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Выручка и выполненные по дням за прошлую неделю",
+      "status_now": "executed",
+      "metrics_now": ["total_revenue", "completed_orders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Выполненные и отмены по дням за прошлую неделю",
+      "status_now": "executed",
+      "metrics_now": ["completed_orders", "cancelled_orders"],
+      "dimensions_now": ["order_date"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Покажи заказы за всё время по месяцам",
+      "status_now": "executed",
+      "metrics_now": ["total_orders"],
+      "dimensions_now": ["order_month"],
+      "assessment": "correct"
+    },
+    {
+      "question": "Выручка с начала года по месяцам",
+      "status_now": "executed",
+      "metrics_now": ["total_revenue"],
+      "dimensions_now": ["order_month"],
+      "assessment": "correct"
+    }
+  ]
+}

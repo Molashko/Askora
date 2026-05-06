@@ -1,0 +1,570 @@
+{
+  "total": 2000,
+  "passed": 1984,
+  "failed": 16,
+  "pass_rate": 99.2,
+  "avg_latency_ms": 201.01,
+  "executed_total_actual": 1975,
+  "executed_total_expected": 1976,
+  "expected_status_distribution": {
+    "executed": 1976,
+    "needs_clarification": 24
+  },
+  "actual_status_distribution": {
+    "executed": 1975,
+    "needs_clarification": 24,
+    "failed_exception": 1
+  },
+  "category_stats": {
+    "regression": {
+      "total": 70,
+      "correct": 70
+    },
+    "ranking_max": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_min": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_top3": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_bottom3": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_best": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_worst": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_best3": {
+      "total": 150,
+      "correct": 150
+    },
+    "ranking_worst3": {
+      "total": 150,
+      "correct": 150
+    },
+    "hour_window": {
+      "total": 2,
+      "correct": 2
+    },
+    "weekday_filter": {
+      "total": 1,
+      "correct": 1
+    },
+    "weekend_filter": {
+      "total": 1,
+      "correct": 1
+    },
+    "duration_filter": {
+      "total": 2,
+      "correct": 2
+    },
+    "multi_metric": {
+      "total": 1,
+      "correct": 1
+    },
+    "multi_date": {
+      "total": 1,
+      "correct": 1
+    },
+    "status_breakdown": {
+      "total": 2,
+      "correct": 2
+    },
+    "unsupported": {
+      "total": 4,
+      "correct": 4
+    },
+    "destructive": {
+      "total": 3,
+      "correct": 3
+    },
+    "ambiguous": {
+      "total": 1,
+      "correct": 1
+    },
+    "out_of_domain": {
+      "total": 1,
+      "correct": 1
+    },
+    "regression_mutated": {
+      "total": 68,
+      "correct": 68
+    },
+    "ranking_max_mutated": {
+      "total": 80,
+      "correct": 79
+    },
+    "ranking_min_mutated": {
+      "total": 80,
+      "correct": 77
+    },
+    "ranking_top3_mutated": {
+      "total": 82,
+      "correct": 81
+    },
+    "ranking_bottom3_mutated": {
+      "total": 82,
+      "correct": 79
+    },
+    "ranking_best_mutated": {
+      "total": 82,
+      "correct": 80
+    },
+    "ranking_worst_mutated": {
+      "total": 79,
+      "correct": 77
+    },
+    "ranking_best3_mutated": {
+      "total": 79,
+      "correct": 77
+    },
+    "ranking_worst3_mutated": {
+      "total": 79,
+      "correct": 77
+    }
+  },
+  "failures": [
+    {
+      "question": "день недел с самой маленькой метрикой по выручке за прошлую неделю, если можно",
+      "category": "ranking_min_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_revenue"
+      ],
+      "actual_metrics": [
+        "total_revenue"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_revenue ASC",
+      "actual_sort": "total_revenue ASC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "пожалуйста лучшие 3 деньа по колиеству заказов за предыдущую неделю плиз",
+      "category": "ranking_best3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_date"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders DESC",
+      "actual_sort": "total_orders ASC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Сортировка total_orders ASC вместо total_orders DESC"
+      ]
+    },
+    {
+      "question": "хочу понять худшй чяс по количеству заказов за 2026 год",
+      "category": "ranking_worst_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_hour"
+      ],
+      "actual_dimensions": [
+        "order_hour"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "total_orders DESC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Сортировка total_orders DESC вместо total_orders ASC"
+      ]
+    },
+    {
+      "question": "подскажи худшие 3 источник отмена по кличеству заказов за текущий месяц пожалуйста",
+      "category": "ranking_worst3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "cancel_source"
+      ],
+      "actual_dimensions": [
+        "cancel_source"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "cancelled_orders ASC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Метрики ('cancelled_orders',) вместо ожидаемых ('total_orders',)",
+        "Сортировка cancelled_orders ASC вместо total_orders ASC"
+      ]
+    },
+    {
+      "question": "можешь источник отмен с самой маленькой метрикой по количесву заказов за предыдущий месяц пожалуйста",
+      "category": "ranking_min_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "cancel_source"
+      ],
+      "actual_dimensions": [
+        "cancel_source"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "cancelled_orders ASC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Метрики ('cancelled_orders',) вместо ожидаемых ('total_orders',)",
+        "Сортировка cancelled_orders ASC вместо total_orders ASC"
+      ]
+    },
+    {
+      "question": "подскажи антито-3 источник отмена по количеству заказов за предыдущий месяц, если можно",
+      "category": "ranking_bottom3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders",
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "cancel_source"
+      ],
+      "actual_dimensions": [
+        "cancel_source"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "cancelled_orders DESC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Сортировка cancelled_orders DESC вместо total_orders ASC"
+      ]
+    },
+    {
+      "question": "можешь день недеи с самой большой метрикой по количеству заказов за предыдущую неделю пожалуйста",
+      "category": "ranking_max_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders DESC",
+      "actual_sort": "total_orders DESC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "хочу понять лучший ден недели по количеству заказов за прошлый месец",
+      "category": "ranking_best_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders DESC",
+      "actual_sort": "total_orders DESC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "подскажи худшие 3 день еделиа по количеству заказов за предыдущий месец",
+      "category": "ranking_worst3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "total_orders ASC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "можешь антитоп 3 деь неделиа по количеству заказов за 2026 год",
+      "category": "ranking_bottom3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "total_orders ASC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "можешь худший день недел по количеству заказов за 2026 год, если можно",
+      "category": "ranking_worst_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "total_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_dow"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "total_orders ASC",
+      "actual_sort": "total_orders ASC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('order_dow',)"
+      ]
+    },
+    {
+      "question": "подскажи антитоп 3 деньа по количеству тмен за мрат",
+      "category": "ranking_bottom3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "cancelled_orders"
+      ],
+      "actual_metrics": [
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "order_date"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "cancelled_orders ASC",
+      "actual_sort": "cancelled_orders DESC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Сортировка cancelled_orders DESC вместо cancelled_orders ASC"
+      ]
+    },
+    {
+      "question": "подскажи лучши 3 чяса по количеству атмен в этом месяце пожалуйста",
+      "category": "ranking_best3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "cancelled_orders"
+      ],
+      "actual_metrics": [
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "order_hour"
+      ],
+      "actual_dimensions": [
+        "order_hour"
+      ],
+      "expected_sort": "cancelled_orders DESC",
+      "actual_sort": "cancelled_orders DESC",
+      "expected_limit": 3,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Лимит 1 вместо 3"
+      ]
+    },
+    {
+      "question": "пожалуйста лучший чяс по количеству омен за 2026 год плиз",
+      "category": "ranking_best_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "cancelled_orders"
+      ],
+      "actual_metrics": [
+        "total_orders"
+      ],
+      "expected_dimensions": [
+        "order_hour"
+      ],
+      "actual_dimensions": [
+        "order_hour"
+      ],
+      "expected_sort": "cancelled_orders DESC",
+      "actual_sort": "total_orders DESC",
+      "expected_limit": 1,
+      "actual_limit": 1,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Метрики ('total_orders',) вместо ожидаемых ('cancelled_orders',)",
+        "Сортировка total_orders DESC вместо cancelled_orders DESC"
+      ]
+    },
+    {
+      "question": "хочу понять город с самой маенькой метрикой по количеству атмен за прошлую ниделю, если можно",
+      "category": "ranking_min_mutated",
+      "expected_status": "executed",
+      "actual_status": "failed_exception",
+      "expected_metrics": [
+        "cancelled_orders"
+      ],
+      "actual_metrics": [],
+      "expected_dimensions": [
+        "city_id"
+      ],
+      "actual_dimensions": [],
+      "expected_sort": "cancelled_orders ASC",
+      "actual_sort": null,
+      "expected_limit": 1,
+      "actual_limit": null,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Исключение во время выполнения: (psycopg.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block\n[SQL: INSERT INTO query_history (id, user_id, question, query_plan_json, sql_text, validation_json, result_preview_json, chart_type, confidence, status, row_count) VALUES (%(id)s::UUID, %(user_id)s::UUID, %(question)s::VARCHAR, %(query_plan_json)s::JSONB, %(sql_text)s::VARCHAR, %(validation_json)s::JSONB, %(result_preview_json)s::JSONB, %(chart_type)s::VARCHAR, %(confidence)s, %(status)s, %(row_count)s::INTEGER) RETURNING query_history.created_at]\n[parameters: {'id': UUID('765c0a6d-e7bc-48df-9ae7-91db081ca181'), 'user_id': UUID('a5ea31f7-e9d0-4477-a135-dcee56e08749'), 'question': 'хочу понять город с самой маенькой метрикой по количеству атмен за прошлую ниделю, если можно', 'query_plan_json': Jsonb({'question': 'хочу понять город с с ... (999 chars)), 'sql_text': \"SELECT CAST(ot.city_id AS TEXT) AS city_id, COUNT(DISTINCT CASE WHEN ot.status_order = 'cancelled' THEN ot.order_id END) AS cancelled_orders FROM ana ... (35 characters truncated) ... RE ot.order_timestamp >= :start_date AND ot.order_timestamp < :end_date GROUP BY CAST(ot.city_id AS TEXT) ORDER BY total_orders DESC LIMIT :row_limit\", 'validation_json': Jsonb({'allowed': True, 'normalized_sql': ... (533 chars)), 'result_preview_json': Jsonb({'rows': [], 'columns': []}), 'chart_type': 'bar', 'confidence': 0.88, 'status': 'failed', 'row_count': 0}]\n(Background on this error at: https://sqlalche.me/e/20/2j85)"
+      ]
+    },
+    {
+      "question": "топ-3 гоорда по количеству амен за 2026 год плиз",
+      "category": "ranking_top3_mutated",
+      "expected_status": "executed",
+      "actual_status": "executed",
+      "expected_metrics": [
+        "cancelled_orders"
+      ],
+      "actual_metrics": [
+        "cancelled_orders"
+      ],
+      "expected_dimensions": [
+        "city_id"
+      ],
+      "actual_dimensions": [
+        "order_date"
+      ],
+      "expected_sort": "cancelled_orders DESC",
+      "actual_sort": "cancelled_orders DESC",
+      "expected_limit": 3,
+      "actual_limit": 3,
+      "required_filters": [],
+      "actual_filters": [],
+      "reasons": [
+        "Измерения ('order_date',) вместо ожидаемых ('city_id',)"
+      ]
+    }
+  ]
+}

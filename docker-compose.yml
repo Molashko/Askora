@@ -1,0 +1,67 @@
+# Совпадает с `start.py` (--project-name), иначе `docker compose up` из этой папки
+# создаёт проект `main` и сеть `main_default` — hostname `db` не находится.
+name: analytics_workspace
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: analytics-db
+    environment:
+      POSTGRES_DB: analytics_hub
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d analytics_hub"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: analytics-redis
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: ./apps/api
+    container_name: analytics-api
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=5).read()"]
+      interval: 5s
+      timeout: 6s
+      retries: 15
+      start_period: 45s
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: ./apps/web
+      args:
+        # Браузер ходит на тот же origin; прокси на api — Route Handler (см. app/api/proxy), INTERNAL в образе runner
+        NEXT_PUBLIC_API_URL: /api/proxy
+    container_name: analytics-web
+    env_file:
+      - .env
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres-data:

@@ -1,0 +1,92 @@
+{
+  "benchmark_name": "hard-query-benchmark",
+  "query_count": 1000,
+  "before": {
+    "passed": 151,
+    "failed": 849,
+    "pass_rate": 15.1,
+    "avg_latency_ms": 173.77,
+    "executed_total_actual": 975
+  },
+  "after": {
+    "passed": 1000,
+    "failed": 0,
+    "pass_rate": 100.0,
+    "avg_latency_ms": 208.32,
+    "executed_total_actual": 976
+  },
+  "expected_outcomes": {
+    "executed": 976,
+    "needs_clarification": 24
+  },
+  "improved_queries_count": 849,
+  "major_gains": [
+    {
+      "category": "ranking_max",
+      "before_correct": 0,
+      "after_correct": 150
+    },
+    {
+      "category": "ranking_min",
+      "before_correct": 0,
+      "after_correct": 150
+    },
+    {
+      "category": "ranking_top3",
+      "before_correct": 0,
+      "after_correct": 150
+    },
+    {
+      "category": "ranking_bottom3",
+      "before_correct": 0,
+      "after_correct": 150
+    },
+    {
+      "category": "ranking_max_mutated",
+      "before_correct": 0,
+      "after_correct": 62
+    },
+    {
+      "category": "ranking_min_mutated",
+      "before_correct": 0,
+      "after_correct": 61
+    },
+    {
+      "category": "ranking_top3_mutated",
+      "before_correct": 0,
+      "after_correct": 60
+    },
+    {
+      "category": "ranking_bottom3_mutated",
+      "before_correct": 0,
+      "after_correct": 60
+    }
+  ],
+  "sample_fixed_queries": [
+    {
+      "question": "День с самой большой выручкой за март",
+      "before_problem": "Система строила обычную дневную динамику без сортировки и лимита.",
+      "after_behavior": "Возвращается один день с максимальной выручкой."
+    },
+    {
+      "question": "Топ-3 города по выручке за март",
+      "before_problem": "Не распознавалась ranking-семантика top-N.",
+      "after_behavior": "Возвращается ранжированный список городов с limit=3."
+    },
+    {
+      "question": "Выручка с 6 часов до 18 часов 15 марта по часам",
+      "before_problem": "Терялся фильтр по диапазону часов.",
+      "after_behavior": "Применяются фильтры order_hour >= 6 и order_hour <= 18."
+    },
+    {
+      "question": "пожалуйста сколько атменилось за вчера",
+      "before_problem": "Опечатка ломала определение метрики отмен.",
+      "after_behavior": "Локальная модель и merge-логика корректно восстанавливают cancelled_orders."
+    },
+    {
+      "question": "хочу понять оборот и завершенные по дням за прошлую неделю",
+      "before_problem": "Терялась вторая метрика в multi-metric запросе.",
+      "after_behavior": "Сохраняются обе метрики: total_revenue и completed_orders."
+    }
+  ]
+}

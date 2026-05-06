@@ -1,0 +1,17 @@
+{
+  "total": 70,
+  "passed": 70,
+  "failed": 0,
+  "pass_rate": 100.0,
+  "avg_latency_ms": 102.59,
+  "false_block_rate": 0.0,
+  "expected_status_distribution": {
+    "executed": 62,
+    "needs_clarification": 8
+  },
+  "actual_status_distribution": {
+    "executed": 62,
+    "needs_clarification": 8
+  },
+  "failures": []
+}
