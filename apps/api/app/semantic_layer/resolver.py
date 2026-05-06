@@ -183,13 +183,22 @@ class SemanticResolver:
         if self._is_percent_change_request(intent.question):
             metrics = self._adapt_metrics_for_percent_change(metrics)
 
+        effective_sort = self._valid_sort_or_none(intent.sort, metrics, dimensions)
+        if intent.sort and not effective_sort:
+            warnings = self._dedupe(
+                warnings
+                + [
+                    f"Сортировка {intent.sort} сброшена, потому что она не соответствует выбранным метрикам или разрезам."
+                ]
+            )
+
         confidence = max(0.1, min(intent.confidence, 0.99))
         if needs_clarification:
             confidence = min(confidence, 0.59)
 
         row_cap = max(1, settings.max_result_rows)
         base_limit = intent.limit or 50
-        if intent.sort and not self._sort_orders_by_time_dimension(intent.sort):
+        if effective_sort and not self._sort_orders_by_time_dimension(effective_sort):
             # Топ-N по метрике: LIMIT задаёт число строк результата, не «дней в периоде».
             min_rows = 1
         else:
@@ -222,13 +231,26 @@ class SemanticResolver:
             multi_date=self._resolve_multi_date(intent.multi_date),
             comparison=intent.comparison or ComparisonSpec(),
             preferred_chart_type=intent.preferred_chart_type,
-            sort=intent.sort,
+            sort=effective_sort,
             limit=resolved_limit,
             confidence=confidence,
             warnings=warnings,
             needs_clarification=needs_clarification,
             clarification_questions=clarification_questions,
         )
+
+    @staticmethod
+    def _valid_sort_or_none(
+        sort: str | None,
+        metrics: list[ResolvedMetric],
+        dimensions: list[ResolvedDimension],
+    ) -> str | None:
+        if not sort:
+            return None
+        sort_key = sort.strip().split()[0].strip().lower()
+        allowed_keys = {item.key.lower() for item in metrics}
+        allowed_keys.update(item.key.lower() for item in dimensions)
+        return sort if sort_key in allowed_keys else None
 
     @staticmethod
     def _sort_orders_by_time_dimension(sort: str) -> bool:
